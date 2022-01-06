@@ -1,3 +1,36 @@
-# Overwrite parameters here
-
-# parameters: {...}
+applications:
+  - openshift4-operators as openshift-operators-redhat
+parameters:
+  openshift4_operators:
+    namespace: openshift-operators-redhat
+    defaultInstallPlanApproval: Automatic
+    defaultSourceNamespace: openshift-marketplace
+    defaultSource: redhat-operators
+  openshift4_keepalived:
+    namespace: openshift-operator-community
+    channel: alpha
+    keepalived_groups:
+      group_1:
+        spec:
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          interface: ens3
+          nodeSelector:
+            node-role.kubernetes.io/loadbalancer: ""
+          blacklistRouterIDs:
+            - 1
+            - 2
+      group_2:
+        spec:
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          interface: ens4
+          nodeSelector:
+            node-role.kubernetes.io/nodeport: ""
+          blacklistRouterIDs:
+            - 3
+            - 4
+      group_3: null
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/master/lib/openshift4-operators.libsonnet
+        output_path: vendor/lib/openshift4-operators.libsonnet

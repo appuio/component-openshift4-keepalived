@@ -6,14 +6,56 @@ The parent key for all of the following parameters is `openshift4_keepalived`.
 
 [horizontal]
 type:: string
-default:: `syn-openshift4-keepalived`
+default:: `openshift-operator-community`
 
 The namespace in which to deploy this component.
 
+== `channel`
+
+[horizontal]
+type:: string
+default:: `alpha`
+
+The channel from where the operator should be fetched.
+
+== `keepalived_groups`
+
+[horizontal]
+type:: object
+default:: `{}`
+
+A dictionary holding the .spec for keepalived groups. The keys of the dict are used as names for the keepalived groups.
+
+See the https://github.com/redhat-cop/keepalived-operator#how-it-works[Keepalived Operator docs] for available parameters.
+
+To remove all keepalived groups, set to null.
 
 == Example
 
 [source,yaml]
 ----
-namespace: example-namespace
+parameters:
+  openshift4_keepalived:
+    namespace: openshift-operator-community
+    channel: alpha
+    keepalived_groups:
+      group_1:
+        spec:
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          interface: ens3
+          nodeSelector:
+            node-role.kubernetes.io/loadbalancer: ""
+          blacklistRouterIDs:
+            - 1
+            - 2
+      group_2:
+        spec:
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          interface: ens4
+          nodeSelector:
+            node-role.kubernetes.io/nodeport: ""
+          blacklistRouterIDs:
+            - 3
+            - 4
+      group_3: null
 ----
