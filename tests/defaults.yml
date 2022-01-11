@@ -7,12 +7,9 @@ parameters:
     defaultSourceNamespace: openshift-marketplace
     defaultSource: redhat-operators
   openshift4_keepalived:
-    namespace: openshift-operator-community
-    channel: alpha
     keepalived_groups:
       group_1:
         spec:
-          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
           interface: ens3
           nodeSelector:
             node-role.kubernetes.io/loadbalancer: ""
@@ -21,7 +18,7 @@ parameters:
             - 2
       group_2:
         spec:
-          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:latest
           interface: ens4
           nodeSelector:
             node-role.kubernetes.io/nodeport: ""
