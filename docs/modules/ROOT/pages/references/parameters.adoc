@@ -24,7 +24,7 @@ The channel from where the operator should be fetched.
 type:: string
 default:: `4.9`
 
-The openshift version which will be used as the image tag in KeepalivedGroup CRD.
+The OpenShift version used to set the corresesponding image tag for the KeepalivedGroup(s).
 
 == `keepalived_groups`
 
