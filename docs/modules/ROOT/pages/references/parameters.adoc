@@ -18,6 +18,14 @@ default:: `alpha`
 
 The channel from where the operator should be fetched.
 
+== `openshift_version`
+
+[horizontal]
+type:: string
+default:: `4.9`
+
+The openshift version which will be used as the image tag in KeepalivedGroup CRD.
+
 == `keepalived_groups`
 
 [horizontal]

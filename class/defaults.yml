@@ -2,4 +2,5 @@ parameters:
   openshift4_keepalived:
     namespace: openshift-operator-community
     channel: alpha
+    openshift_version: '4.9'
     keepalived_groups: {}
