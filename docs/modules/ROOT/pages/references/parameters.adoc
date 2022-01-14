@@ -18,6 +18,14 @@ default:: `alpha`
 
 The channel from where the operator should be fetched.
 
+== `openshift_version`
+
+[horizontal]
+type:: string
+default:: `4.9`
+
+The OpenShift version used to set the corresesponding image tag for the KeepalivedGroup(s).
+
 == `keepalived_groups`
 
 [horizontal]

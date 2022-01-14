@@ -1,0 +1,33 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KeepalivedGroup
+metadata:
+  annotations: {}
+  labels:
+    name: group-1
+  name: group-1
+  namespace: openshift-keepalived-operator
+spec:
+  blacklistRouterIDs:
+    - 1
+    - 2
+  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:v4.9
+  interface: ens3
+  nodeSelector:
+    node-role.kubernetes.io/loadbalancer: ''
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KeepalivedGroup
+metadata:
+  annotations: {}
+  labels:
+    name: group-2
+  name: group-2
+  namespace: openshift-keepalived-operator
+spec:
+  blacklistRouterIDs:
+    - 3
+    - 4
+  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:latest
+  interface: ens4
+  nodeSelector:
+    node-role.kubernetes.io/nodeport: ''
