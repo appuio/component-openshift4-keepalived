@@ -8,6 +8,17 @@ local inv = kap.inventory();
 local params = inv.parameters.openshift4_keepalived;
 local image = 'registry.redhat.io/openshift4/ose-keepalived-ipfailover:v' + params.openshift_version;
 
+local namespace =
+  kube.Namespace(params.namespace)
+  {
+    metadata+: {
+      annotations+: {
+        // Allow Pods to be scheduled on any Node
+        'openshift.io/node-selector': '',
+      },
+    },
+  };
+
 local keepalived_groups = std.filter(
   function(it) it != null,
   [
@@ -27,6 +38,7 @@ local keepalived_groups = std.filter(
 );
 
 {
+  '00_namespace': namespace,
   '00_operator_group': operatorlib.OperatorGroup('cluster-keepalived') {
     metadata+: {
       namespace: params.namespace,
