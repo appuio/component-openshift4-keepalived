@@ -19,6 +19,29 @@ local namespace =
     },
   };
 
+local rolebinding =
+  kube.RoleBinding('privileged')
+  {
+    metadata+: {
+      namespace: params.namespace,
+    },
+    roleRef_: {
+      kind: 'ClusterRole',
+      metadata: {
+        name: 'system:openshift:scc:privileged',
+      },
+    },
+    subjects_: [
+      {
+        kind: 'ServiceAccount',
+        metadata: {
+          name: 'default',
+          namespace: params.namespace,
+        },
+      },
+    ],
+  };
+
 local keepalived_groups = std.filter(
   function(it) it != null,
   [
@@ -51,4 +74,5 @@ local keepalived_groups = std.filter(
     'community-operators'
   ),
   [if std.length(keepalived_groups) > 0 then '20_keepalived_groups']: keepalived_groups,
+  '30_rolebinding': rolebinding,
 }
