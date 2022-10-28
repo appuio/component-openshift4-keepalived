@@ -16,6 +16,10 @@ local namespace =
         // Allow Pods to be scheduled on any Node
         'openshift.io/node-selector': '',
       },
+      labels+: {
+        // Exclude namespace from user-workload-monitoring
+        'openshift.io/user-monitoring': 'false',
+      },
     },
   };
 

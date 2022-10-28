@@ -5,4 +5,5 @@ metadata:
     openshift.io/node-selector: ''
   labels:
     name: openshift-keepalived-operator
+    openshift.io/user-monitoring: 'false'
   name: openshift-keepalived-operator
