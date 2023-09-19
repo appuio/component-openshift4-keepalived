@@ -8,6 +8,14 @@ metadata:
   namespace: openshift-keepalived-operator
 spec:
   channel: alpha
+  config:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: node-role.kubernetes.io/infra
+                  operator: Exists
   installPlanApproval: Automatic
   name: keepalived-operator
   source: community-operators
