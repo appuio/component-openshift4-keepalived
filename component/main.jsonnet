@@ -55,6 +55,9 @@ local keepalived_groups = std.filter(
       kube._Object('redhatcop.redhat.io/v1alpha1', 'KeepalivedGroup', formated_name) {
         metadata+: {
           namespace: params.namespace,
+          annotations+: {
+            'argocd.argoproj.io/sync-options': 'SkipDryRunOnMissingResource=true',
+          },
         },
         spec+: {
           image: image,
