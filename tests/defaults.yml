@@ -1,6 +1,9 @@
 applications:
   - openshift4-operators as openshift-operators-redhat
 parameters:
+  facts:
+    distribution: openshift4
+
   openshift4_operators:
     namespace: openshift-operators-redhat
     defaultInstallPlanApproval: Automatic
