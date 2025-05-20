@@ -6,7 +6,7 @@ local operatorlib = import 'lib/openshift4-operators.libsonnet';
 local inv = kap.inventory();
 // The hiera parameters for the component
 local params = inv.parameters.openshift4_keepalived;
-local image = 'registry.redhat.io/openshift4/ose-keepalived-ipfailover:v' + params.openshift_version;
+local image = '%(registry)s/%(repository)s:%(tag)s' % params.images.keepalived;
 
 local namespace =
   kube.Namespace(params.namespace)

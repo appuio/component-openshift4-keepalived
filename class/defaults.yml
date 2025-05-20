@@ -2,7 +2,15 @@ parameters:
   openshift4_keepalived:
     =_metadata:
       multi_tenant: true
+
     namespace: openshift-keepalived-operator
+
     channel: alpha
-    openshift_version: '4.9'
+
+    images:
+      keepalived:
+        registry: registry.redhat.io
+        repository: openshift4/ose-keepalived-ipfailover-rhel9
+        tag: v4.18
+
     keepalived_groups: {}

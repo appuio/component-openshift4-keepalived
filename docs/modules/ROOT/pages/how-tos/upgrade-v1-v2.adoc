@@ -1,0 +1,26 @@
+= Upgrade `component-openshift4-keepalived` from `v1.x` to `v2.x`
+
+Version 2.x changes how the image used for keepalived is specified.
+
+
+== Migration steps
+
+If you use the component with the default configuration, you don't need to do anything.
+
+If you are using an the `openshift_version` parameter, you need to change the following:
+
+[source,yaml]
+----
+openshift4_keepalived:
+  images:
+    keepalived:
+      tag: v4.18 <1>
+----
+<1> The tag is the version of the keepalived image to use, replacing the parameter `openshift_version`.
+
+
+== Explanation of configuration changes
+
+=== legacy `openshift_version`
+
+The parameter `openshift_version` has been replaced by the `images.keepalived.tag` parameter.

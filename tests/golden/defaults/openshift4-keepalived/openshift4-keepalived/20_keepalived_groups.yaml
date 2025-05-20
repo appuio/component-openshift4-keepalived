@@ -11,7 +11,7 @@ spec:
   blacklistRouterIDs:
     - 1
     - 2
-  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:v4.9
+  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover-rhel9:v4.18
   interface: ens3
   nodeSelector:
     node-role.kubernetes.io/loadbalancer: ''
@@ -29,7 +29,7 @@ spec:
   blacklistRouterIDs:
     - 3
     - 4
-  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:latest
+  image: registry.redhat.io/openshift4/ose-keepalived-ipfailover-rhel9:latest
   interface: ens4
   nodeSelector:
     node-role.kubernetes.io/nodeport: ''

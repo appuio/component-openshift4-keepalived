@@ -1,6 +1,13 @@
 applications:
   - openshift4-operators as openshift-operators-redhat
+
 parameters:
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/master/lib/openshift4-operators.libsonnet
+        output_path: vendor/lib/openshift4-operators.libsonnet
+
   facts:
     distribution: openshift4
 
@@ -9,6 +16,7 @@ parameters:
     defaultInstallPlanApproval: Automatic
     defaultSourceNamespace: openshift-marketplace
     defaultSource: redhat-operators
+
   openshift4_keepalived:
     keepalived_groups:
       group_1:
@@ -21,7 +29,7 @@ parameters:
             - 2
       group_2:
         spec:
-          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover:latest
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover-rhel9:latest
           interface: ens4
           nodeSelector:
             node-role.kubernetes.io/nodeport: ""
@@ -29,8 +37,3 @@ parameters:
             - 3
             - 4
       group_3: null
-  kapitan:
-    dependencies:
-      - type: https
-        source: https://raw.githubusercontent.com/appuio/component-openshift4-operators/master/lib/openshift4-operators.libsonnet
-        output_path: vendor/lib/openshift4-operators.libsonnet

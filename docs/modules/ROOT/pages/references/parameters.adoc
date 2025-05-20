@@ -10,6 +10,7 @@ default:: `openshift-operator-community`
 
 The namespace in which to deploy this component.
 
+
 == `channel`
 
 [horizontal]
@@ -18,13 +19,15 @@ default:: `alpha`
 
 The channel from where the operator should be fetched.
 
-== `openshift_version`
+
+== `images`
 
 [horizontal]
-type:: string
-default:: `4.9`
+type:: dictionary
+default:: See https://github.com/projectsyn/espejote/blob/master/class/defaults.yml[`class/defaults.yml`]
 
-The OpenShift version used to set the corresesponding image tag for the KeepalivedGroup(s).
+The images to use for this component.
+
 
 == `keepalived_groups`
 
@@ -49,7 +52,6 @@ parameters:
     keepalived_groups:
       group_1:
         spec:
-          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
           interface: ens3
           nodeSelector:
             node-role.kubernetes.io/loadbalancer: ""
@@ -58,7 +60,7 @@ parameters:
             - 2
       group_2:
         spec:
-          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover
+          image: registry.redhat.io/openshift4/ose-keepalived-ipfailover-rhel9:latest
           interface: ens4
           nodeSelector:
             node-role.kubernetes.io/nodeport: ""
